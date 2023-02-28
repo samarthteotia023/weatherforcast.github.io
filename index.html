@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+         background: url(./neda-astani-KWTkd7mHqKE-unsplash.jpg); 
+         background-repeat: no-repeat;
+         background-size: 120rem;     
+          
+        }
+        .clear{
+            background-image: url(./sun-48202.png);
+            background-size: 280px;
+            background-repeat: no-repeat;
+            background-position: 600px 30px;
+        }
+        .cloudy{
+            background-image: url(./pngegg.png);
+            background-size: 280px;
+            background-repeat: no-repeat;
+            background-position: 600px 30px;
+        }
+        .rainy{
+            background-image: url(./511-5117855_cloud-png-rain-cloud-png-rain-cloud-and.png);
+            background-size: 280px;
+            background-repeat: no-repeat;
+            background-position: 600px 30px;
+        }
+        .night{
+            background-image: url(./moon-png-44668.png);
+            background-size: 280px;
+            background-repeat: no-repeat;
+            background-position: 600px 30px;
+        }
+        
+
+
+        #location{
+            padding: 10px;
+            margin-top: -7px;
+        }
+        .search{
+            padding: 10px;
+            height: 20px;
+            margin-top: 6px;
+            width: 150px;
+            border: 1px solid black;
+           
+            
+            background-color: rgb(139, 177, 211);        
+          
+    
+            ;
+            
+            
+            
+        }
+        
+        
+        .location{
+            
+            display: flex;
+           
+            max-width: 15rem;
+            height: 2.2rem;
+            position: sticky;
+            
+            
+
+          
+        }
+        p{
+            color: rgb(16, 16, 13);
+            font-size: 2.6rem;
+            
+           
+            text-align: center;
+        }
+      .but{
+        background-color:rgb(139, 177, 211) ;
+        height: 22px;
+        margin-top: 6px;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      .mid{
+        display: flex;
+        margin: 300px auto;
+        justify-content: center;padding: 23px;
+      }
+      .temp1{
+        border: 2px solid rgb(244, 240, 240);
+        height: 360px;
+        width: 360px;
+        margin: 23px;
+        padding: 10px;
+        border-radius: 50px;
+       
+        
+      }
+      .humidity{
+        border: 2px solid rgb(249, 245, 245);
+        height: 360px;
+        width: 360px;
+        margin: 23px;
+        padding: 10px;
+        border-radius: 50px;
+        
+        
+      }
+      
+      .air{
+        border: 2px solid rgb(251, 247, 247);
+        height: 360px;
+        width: 360px;
+        margin: 23px;
+        padding: 10px;
+        border-radius: 50px;
+        
+      }
+      #temp2{
+       
+        height: 160px;
+        margin: 10px 100px;
+    
+        
+      }
+      #humid{
+        margin-top: 10px;
+        margin-left: 100px;
+        height: 160px;
+      }
+      #air{
+        margin-top: 10px;
+        margin-left: -2px;
+        height: 160px;
+      }
+      H1{   
+            color: rgb(200, 241, 34);
+        text-align: center;
+        margin-top: 1px;
+      }
+      #city{
+        margin-left: 1000px;
+        font-size: 3rem;
+        margin-top: -20px;
+      }
+    </style>
+</head>
+<body>
+    <section class="header">
+      <div class="location">
+        
+         <img  id="location" src="./My project.png" alt="location" height="30px">
+         <input type="search" id="search" class="search" placeholder="Enter your city">
+         <button class="but" id="submit"> <img height="20px" src="./icons8-magnifying-glass-tilted-left-48.png" alt=""></button>
+        </div>
+        <h1 id="city">Delhi</h1>
+    </section>
+    <section class="mid">
+
+        <div class="temp1">
+            <h1>TEMPERATURE</h1>
+           <img id="temp2" height="60px"  src="./pngwing.com.png" alt="">
+           <p id="temp3" ></p>
+        </div>
+        <div class="humidity">
+            <H1>HUMIDITY</H1>
+            <img id="humid" height="60px"  src="./icons8-humidity-80.png" alt="">
+            <p id="humidity1"></p>
+        </div>
+        <div class="air">
+            <H1>AIR</H1>
+            <img id="air" height="60px"  src="./pngwing.com (1).png" alt="">
+            <p id="air1"></p>
+
+        </div>
+
+    </section>
+
+    <script>
+      
+      const submit=document.querySelector('#submit');
+      const city=document.querySelector('#city');
+      function weatherupdate(city){
+        fetch('https://api.openweathermap.org/data/2.5/weather?q='+city+'&units=metric&appid=b72ea2562abbaa7d9d1fc6e904c84380')
+        .then(response=>response.json())
+        .then((response)=>{
+          console.log(response);
+          const {temp,humidity}=response.main;
+          const {speed}=response.wind;
+          
+          temp3.innerHTML=temp +"°C";
+          humidity1.innerHTML=humidity+ "%";
+          air1.innerHTML=speed +"km/h";
+
+        }
+        )
+        .catch(error=>console.error(error))
+       
+      }
+      addEventListener('load', ()=>{
+        weatherupdate('Delhi');
+      });
+
+      submit.addEventListener('click', ()=>{
+        weatherupdate(search.value);
+        city.innerHTML=search.value;
+
+      })
+      document.addEventListener('keypress', (e)=>{
+        if(e.keyCode ==13){
+          submit.click();
+
+        
+        }
+
+      })
+      
+
+
+
+
+
+      
+
+      
+    </script>
+</body>
+</html>
