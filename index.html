@@ -203,13 +203,20 @@
         .catch(error=>console.error(error))
        
       }
-      addEventListener('load', ()=>{
+      addEventListener('load', (e)=>{
         weatherupdate('Delhi');
       });
 
-      submit.addEventListener('click', ()=>{
+      submit.addEventListener('click', (e)=>{
         weatherupdate(search.value);
         city.innerHTML=search.value;
+
+      })
+         submit.addEventListener('keypress', (e)=>{
+             if(e.key==="Enter"){
+        weatherupdate(search.value);
+        city.innerHTML=search.value;
+             }
 
       })
       
